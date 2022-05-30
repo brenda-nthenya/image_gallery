@@ -21,6 +21,12 @@ class TestLocation(TestCase):
         locations=Location.objects.all()
         self.assertTrue(len(locations)> 0)
 
+    def test_delete_location(self):
+        self.ocation.delete_location()
+        place=Location.objects.all()
+        self.assertTrue(len(place) == 0)
+
+
 class TestCategory(TestCase):
 
     def setUp(self):
