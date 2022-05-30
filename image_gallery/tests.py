@@ -10,3 +10,11 @@ class TestLocation(TestCase):
 
     def test_instance(self):
         self.assertTrue(isinstance(self.location, Location))
+
+    def test_save_location(self):
+        self.location.save_location()
+        locations=Location.get_locations()
+        self.assertTrue(len(locations) > 0)
+
+class TestCategory(TestCase):
+    
