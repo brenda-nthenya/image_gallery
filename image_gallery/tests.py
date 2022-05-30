@@ -16,6 +16,11 @@ class TestLocation(TestCase):
         locations=Location.get_locations()
         self.assertTrue(len(locations) > 0)
 
+    def test_save_location(self):
+        self.location.save_location()
+        locations=Location.objects.all()
+        self.assertTrue(len(locations)> 0)
+
 class TestCategory(TestCase):
 
     def setUp(self):
