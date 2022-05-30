@@ -17,4 +17,10 @@ class TestLocation(TestCase):
         self.assertTrue(len(locations) > 0)
 
 class TestCategory(TestCase):
-    
+
+    def setUp(self):
+        self.category = Category(name='home')
+        self.category.save_category
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.category, Category))
