@@ -22,7 +22,7 @@ class TestLocation(TestCase):
         self.assertTrue(len(locations)> 0)
 
     def test_delete_location(self):
-        self.ocation.delete_location()
+        self.location.delete_location()
         place=Location.objects.all()
         self.assertTrue(len(place) == 0)
 
