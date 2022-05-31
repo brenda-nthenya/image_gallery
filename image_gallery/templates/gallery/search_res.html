@@ -15,28 +15,28 @@
 
     {% if images %}
     <div class="card-columns">
-        {% for image in images %}
-        <div class="card" data-toggle="modal" data-target="#{{image.id}}">
-            <img src="{{image.image.url}}" alt="{{image.name}}" class="card-img">
+        {% for new_image in image %}
+        <div class="card" data-toggle="modal" data-target="#{{new_image.id}}">
+            <img src="{{new_image.image.url}}" alt="{{image_image.name}}" class="card-img">
         </div>
-        <div class="modal fade " id="{{image.id}}" tabindex="-1" role="dialog"
+        <div class="modal fade " id="{{new_image.id}}" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content modalcard">
                     <div class="modal-header">
-                        <h5 class="modal-title d-block mx-auto" id="exampleModalLongTitle">{{image.name}}</h5>
+                        <h5 class="modal-title d-block mx-auto" id="exampleModalLongTitle">{{new_image.name}}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <img src="{{image.image.url}}" alt="{{image.name}}" class="img-fluid">
-                        <p>{{image.description}}</p>
-                        <span class="btn btn-sm btn-outline-success">{{image.category | title}}</span> <a href="/location/{{image.location}}" class="btn btn-sm btn-outline-info">{{image.location}}</a>
+                        <img src="{{image_image.image.url}}" alt="{{new_image.name}}" class="img-fluid">
+                        <p>{{new_image.description}}</p>
+                        <span class="btn btn-sm btn-outline-success">{{new_image.category | title}}</span> <a href="/location/{{new_image.location}}" class="btn btn-sm btn-outline-info">{{new_image.location}}</a>
                     </div>
                     <div class="modal-footer">
                         <input class="form-control input-lg" type="text"
-                               value="{{image.image.url}}" id="{{image.id}}.url">
+                               value="{{new_image.image.url}}" id="{{new_image.id}}.url">
                         <button class="btn btn-success btn-sm" onclick="copyLink('{{image.id}}.url')">Copy</button>
                         <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Close
                         </button>

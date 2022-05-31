@@ -1,13 +1,25 @@
 {% extends 'gallery/base.html' %}
 
 {% block content %}
-    
+    <div class="gallery">
+        <div class="row">
+            <nav class="nav d-flex justify-content-between">
 
-    <div class="card-columns">
-    {% for new_image in image %}
-        <div class="card" data-toggle="modal" data-target="#{{new_image.id}}">
-            <img src="{{new_image.image.url}}" alt="{{new_image.name}}" class="card-img">
+                {% for category in categories %}
+                    <a class="p-2 link-secondary" href="">{{category.name}}</a>
+                {% endfor %}
+
+            </nav>
         </div>
-    {% endfor %}
+
+        <div class="row">
+            <div class="card-columns">
+            {% for new_image in image %}
+                <div class="card" data-toggle="modal" data-target="#{{new_image.id}}">
+                    <img src="{{new_image.image.url}}" alt="{{new_image.name}}" class="card-img">
+                </div>
+            {% endfor %}
+            </div>
+        </div>
     </div>
 {% endblock %}
