@@ -6,8 +6,11 @@ from .models import *
 def index(request):
     image = Image.objects.all()
     
+    categories = Category.objects.all()
+
     context= {
-        'image': image
+        "image": image,
+        "categories": categories
     }
 
     return render(request, 'gallery/index.html', context)
@@ -16,15 +19,16 @@ def search_results(request):
 
     if 'imagesearch' in request.GET and request.GET["imagesearch"]:
         category = request.GET.get("imagesearch")
-        searched_images = Image.search_by_category(category)
+        images = Image.search_by_category(category)
         message = f"{category}"
         context = {
             "message": message, 
-            "images": searched_images
+            "images": images
+
         }
-        print(searched_images)
+
+
         return render(request, 'gallery/search_res.html', context)
     else:
         message = "You haven't searched for any image category"
-
         return render(request, 'gallery/search_res.html', {"message": message})
