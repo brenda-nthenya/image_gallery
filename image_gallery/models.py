@@ -49,6 +49,9 @@ class Image(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.name
+
     # Save image
     def save_image(self):
         self.save()
@@ -65,8 +68,16 @@ class Image(models.Model):
         image = cls.objects.filter(id=id).all()
         return image
 
+    @classmethod
+    def filter_by_location(cls, location):
+        image_location = Image.objects.filter(location__name=location).all()
+        return image_location
 
-    
+    @classmethod
+    def search_by_category(cls, category):
+        images = cls.objects.filter(category__name__icontains=category)
+        return images
 
-
+    class Meta:
+        ordering = ['date']
 
