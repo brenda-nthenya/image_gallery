@@ -26,6 +26,13 @@ class TestLocation(TestCase):
         place=Location.objects.all()
         self.assertTrue(len(place) == 0)
 
+    # def test_update_location(self):
+    #     new_location = 'Kisumu'
+    #     self.location.update_location(self.location.id, new_location)
+    #     changed_location = Location.objects.filter(name='Kisumu')
+    #     self.assertEqual(self.location, changed_location)
+
+
 
 class TestCategory(TestCase):
 
@@ -45,3 +52,18 @@ class TestCategory(TestCase):
         self.category.delete_category()
         categories=Category.objects.all()
         self.assertTrue(len(categories) == 0)
+
+    class TestImage(TestCase):
+
+        def setUp(self):
+            self.location = Location(name='Nairobi')
+            self.location.save_location()
+
+            self.category = Category(name='Garden')
+            self.category.save_category()
+
+            self.image_test = Image(id=1, name='image', description='this is a test image', location=self.location,
+                                    category=self.category)
+
+        def test_instance(self):
+            self.assertTrue(isinstance(self.image_test, Image))
