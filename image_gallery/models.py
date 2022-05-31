@@ -65,7 +65,7 @@ class Image(models.Model):
 
     @classmethod
     def get_image_by_id(cls, id):
-        image = cls.objects.filter(id=id).all()
+        image = Image.objects.get(id=id)
         return image
 
     @classmethod
@@ -74,8 +74,8 @@ class Image(models.Model):
         return image_location
 
     @classmethod
-    def search_by_category(cls, category):
-        images = cls.objects.filter(category__name__icontains=category)
+    def search_by_category(cls, search_term):
+        images = cls.objects.filter(category__name__icontains=search_term)
         return images
 
     class Meta:
