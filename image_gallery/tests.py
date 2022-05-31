@@ -67,3 +67,18 @@ class TestCategory(TestCase):
 
         def test_instance(self):
             self.assertTrue(isinstance(self.image_test, Image))
+
+        def test_save_image(self):
+            self.image_test.save()
+            saved_image = Image.objects.all()
+            self.assertTrue(len(saved_image) > 0)
+
+        def tearDown(self):
+            Image.objects.all().delete()
+            Location.objects.all().delete()
+            Category.objects.all().delete()
+
+        def test_delete_image(self):
+            self.image_test.delete_image()
+            pictures = Image.objects.all()
+            self.assertTrue(len(pictures) == 0)
