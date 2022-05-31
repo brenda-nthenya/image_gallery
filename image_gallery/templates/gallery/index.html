@@ -1,25 +1,72 @@
 {% extends 'gallery/base.html' %}
 
 {% block content %}
-    <div class="gallery">
-        <div class="row">
-            <nav class="nav d-flex justify-content-between">
-
-                {% for category in categories %}
-                    <a class="p-2 link-secondary" href="">{{category.name}}</a>
-                {% endfor %}
-
-            </nav>
-        </div>
-
-        <div class="row">
-            <div class="card-columns">
-            {% for new_image in image %}
-                <div class="card" data-toggle="modal" data-target="#{{new_image.id}}">
-                    <img src="{{new_image.image.url}}" alt="{{new_image.name}}" class="card-img">
+<body>
+    
+    <div class="container-fluid" id="container">
+        <div id="image" class=" container p-1">
+            <div id="front" class=" zoom">
+                {% for new_image in image %}
+                <div class="overlay">
+                    
+                    <div class="col-md-5">
+                        <div class="well">
+                            <img src="{{new_image.image.url}}" style="width: 100%" class="image" data-toggle="modal" data-target="#exampleModal{{new_image.id}}"class="img-responsive" alt="Image">
+                        </div>      
+                    </div>
+                    
                 </div>
-            {% endfor %}
+                {% endfor %}
+            </div>  
+        </div>        
+    
+    
+    
+    <!--  modal -->
+    {% for new_image in image %}
+        <div class="modal fade"  id="exampleModal{{new_image.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">{{new_image.name }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <img src="{{new_image.image.url}}" class="img-fluid" data-toggle="modal" data-target="#exampleModal{{new_image.id}}" style="width: 100%;">
+                        <p> {{new_image.description }}</p><label for="location"> Image location :{{new_image.location }}</label> <br>
+                        <label for="Category">Category: {{new_image.category}}</label>
+                    <div class="modal-footer">
+                        <input class="form-control" type="text" value="http://127.0.0.1:8000{{new_image.image.url}}" id="thislinkhere-{{new_image.id}}">
+                        <a onclick="copyLink('{{new_image.id}}'.url)"><button type="button" class="btn btn-outline-secondary my-2 my-sm-0 link-btn">Copy Link</button></a>
+                    </div>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
             </div>
-        </div>
+        </div> 
     </div>
+    
+</body>
+<style>
+    .image{
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        transition: all 0.3s ease 0s;
+        cursor: pointer;
+        border-radius: 10px;
+        width: 100% !important;
+      }
+      .image:hover{
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+        opacity: 0.7;
+        overflow: hidden;
+        transition: .5s ease;
+        transform: translateY(-7px);
+      }
+
+    
+    
+    </style>
+    
+    {% endfor %}
 {% endblock %}

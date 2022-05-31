@@ -1,53 +1,31 @@
 {% extends 'gallery/base.html' %}
 {% block content %}
 
-<div class="container">
 
-    {% if images %}
-    <h2 class="text-center" id="found">Found {{ images|length }} images in '{{message}}' category</h2>
-    {% else %}
-    <h2 class="text-center" id="foundnon">{{message}}</h2>
+    <div class="container">
 
-    <a class="d-block mx-auto" href="/">
-        <button class="btn btn-sm btn-info d-block mx-auto">Back Home</button>
-    </a>
-    {% endif %}
-
-    {% if images %}
-    <div class="card-columns">
-        {% for new_image in image %}
-        <div class="card" data-toggle="modal" data-target="#{{new_image.id}}">
-            <img src="{{new_image.image.url}}" alt="{{image_image.name}}" class="card-img">
+        <div class="row">
+        {% if images %}
+            <h2>Found {{ images|length }} of searched term {{message}}</h2>
+        {% else %}
+            <h2> Found 0 {{images}} for the search term. {{message}}</h2>
+            <a class="d-block mx-auto" href="/">
+                <button class="btn btn-sm btn-info d-block mx-auto">Back Home</button>
+            </a>
+        {% endif %}
+    
         </div>
-        <div class="modal fade " id="{{new_image.id}}" tabindex="-1" role="dialog"
-             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content modalcard">
-                    <div class="modal-header">
-                        <h5 class="modal-title d-block mx-auto" id="exampleModalLongTitle">{{new_image.name}}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <img src="{{image_image.image.url}}" alt="{{new_image.name}}" class="img-fluid">
-                        <p>{{new_image.description}}</p>
-                        <span class="btn btn-sm btn-outline-success">{{new_image.category | title}}</span> <a href="/location/{{new_image.location}}" class="btn btn-sm btn-outline-info">{{new_image.location}}</a>
-                    </div>
-                    <div class="modal-footer">
-                        <input class="form-control input-lg" type="text"
-                               value="{{new_image.image.url}}" id="{{new_image.id}}.url">
-                        <button class="btn btn-success btn-sm" onclick="copyLink('{{image.id}}.url')">Copy</button>
-                        <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Close
-                        </button>
-                    </div>
+    
+        <div class="row">
+    
+        {% if images %}
+            {% for new_image in images %}
+                <div class="col-sm-4 col-md-3">
+                    <h1>{{new_image.photographer}}</h1>
+                    <img src="{{new_image.image.url}}" alt="" style="max-width: 250px;">
                 </div>
-            </div>
+            {% endfor %}
+        {% endif %}
         </div>
-
-
-        {% endfor %}
     </div>
-    {% endif %}
-</div>
-{% endblock %}
+  {% endblock %}
